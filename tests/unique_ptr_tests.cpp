@@ -61,6 +61,18 @@ void test_custom_deleter() {
     std::cout << "Custom deleter test passed!\n";
 }
 
+void test_array() {
+    auto arr = make_unique<int[]>(5);
+    for (std::size_t i = 0; i < 5; ++i) {
+        arr[i] = static_cast<int>(i * 10);
+    }
+    for (std::size_t i = 0; i < 5; ++i) {
+        assert(arr[i] == static_cast<int>(i * 10));
+    }
+    std::cout << "Array unique_ptr test passed!\n";
+}
+
+
 int main() {
     std::cout << "Running tests...\n";
 
