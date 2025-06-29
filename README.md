@@ -15,13 +15,16 @@ When the unique_ptr goes out of scope, it automatically deletes the managed obje
 
 ## 📂 Project structure 
 
-├── include / \
-│......└── unique_ptr.hpp \
-├── src / \
-│......└── main.cpp \
-├── tests / \
-│......└── unique_ptr_tests.cpp \
-└── README.md 
+```css
+.
+├── include/
+│   └── unique_ptr.hpp
+├── src/
+│   └── main.cpp
+├── tests/
+│   └── unique_ptr_tests.cpp
+└── README.md
+```
 
 ## 🚀 Build & Run
 ``` md
