@@ -37,17 +37,20 @@ public:
         return *this;
     }
 
-    T& operator*() const noexcept {
+    constexpr T& operator*() const noexcept {
         return *ptr_;
     }
 
-    T* operator->() const noexcept {
+    constexpr T* operator->() const noexcept {
         return ptr_;
     }
 
-    explicit operator bool() const noexcept {
+    constexpr explicit operator bool() const noexcept {
         return ptr_ != nullptr;
     }
+
+    Deleter& get_deleter() noexcept { return deleter_; }
+    const Deleter& get_deleter() const noexcept { return deleter_; }
 
     void swap(unique_ptr& other) noexcept {
         using std::swap;
@@ -55,19 +58,16 @@ public:
         swap(deleter_, other.deleter_);
     }
 
-    T* get() const noexcept {
+    constexpr T* get() const noexcept {
         return ptr_;
     }
 
     T* release() noexcept {
-        T* temp = ptr_;
-        ptr_ = nullptr;
-        return temp;
+        return std::exchange(ptr_, nullptr);
     }
 
     void reset(T* new_ptr = nullptr) noexcept {
-        deleter_(ptr_);
-        ptr_ = new_ptr;
+        deleter_(std::exchange(ptr_, new_ptr));
     }
 
 private:
@@ -113,9 +113,12 @@ public:
         return ptr_[i];
     }
 
-    explicit operator bool() const noexcept {
+    constexpr explicit operator bool() const noexcept {
         return ptr_ != nullptr;
     }
+
+    Deleter& get_deleter() noexcept { return deleter_; }
+    const Deleter& get_deleter() const noexcept { return deleter_; }
 
     void swap(unique_ptr& other) noexcept {
         using std::swap;
@@ -123,19 +126,16 @@ public:
         swap(deleter_, other.deleter_);
     }
 
-    T* get() const noexcept {
+    constexpr T* get() const noexcept {
         return ptr_;
     }
 
     T* release() noexcept {
-        T* temp = ptr_;
-        ptr_ = nullptr;
-        return temp;
+        return std::exchange(ptr_, nullptr);
     }
 
     void reset(T* new_ptr = nullptr) noexcept {
-        deleter_(ptr_);
-        ptr_ = new_ptr;
+        deleter_(std::exchange(ptr_, new_ptr));
     }
 
 private:
