@@ -52,7 +52,7 @@ struct Test {
 };
 
 int main() {
-    unique_ptr<Test> ptr(new Test());
+    unique_ptr<Test> ptr = make_unique<Test>();
     ptr->sayHello();
     // Automatic destruction when ptr goes out of scope
     return 0;
