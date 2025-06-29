@@ -111,7 +111,7 @@ public:
         return *this;
     }
 
-    T& operator[](std::size_t i) const {
+    T& operator[](std::size_t i) const noexcept {
         return ptr_[i];
     }
 
