@@ -2,6 +2,8 @@
 
 #include <utility>
 #include <memory>
+#include <type_traits>
+#include <cstddef>
 
 template <typename T, typename Deleter = std::default_delete<T>>
 class unique_ptr {
